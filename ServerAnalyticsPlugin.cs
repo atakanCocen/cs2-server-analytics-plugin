@@ -33,42 +33,12 @@ public class ServerAnalyticsPlugin : BasePlugin
     [GameEventHandler]
     public HookResult OnRoundEnd(EventRoundEnd @event, GameEventInfo info)
     {
-        CounterStrikeSharp.API.Utilities.GetPlayers().ForEach(player =>
-        {
-            if (player.IsValid)
-            {
-                if (player.Pawn.IsValid && player.Pawn.Value != null)
-                {
-                    player.Pawn.Value.GravityScale = 1.0f;
-                }
-            }
-        });
-
         return HookResult.Continue;
     }
 
     [GameEventHandler]
     public HookResult HandlePlayerHurt(EventPlayerHurt @event, GameEventInfo eventInfo)
     {
-        var victim = @event.Userid;
-        var attacker = @event.Attacker;
-
-        if (victim?.IsValid ?? false)
-        {
-            if (victim.Pawn.IsValid && victim.Pawn.Value != null)
-            {
-                victim.Pawn.Value.GravityScale *= 0.8f;
-            }
-        }
-
-        if (attacker?.IsValid ?? false)
-        {
-            if (attacker.Pawn.IsValid && attacker.Pawn.Value != null)
-            {
-                attacker.Pawn.Value.GravityScale *= 0.8f;
-            }
-        }
-
         return HookResult.Continue;
     }
 }
